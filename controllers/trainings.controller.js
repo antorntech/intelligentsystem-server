@@ -54,7 +54,7 @@ module.exports.addTrainings = async (req, res) => {
     }
 
     req.body.benefits = JSON.parse(req.body.benefits || "[]");
-    req.body.courseOffers = JSON.parse(req.body.courseOffers || "[]");
+    req.body.offers = JSON.parse(req.body.offers || "[]");
     req.body.works = JSON.parse(req.body.works || "[]");
     req.body.tags = JSON.parse(req.body.tags || "[]");
 
@@ -82,7 +82,7 @@ module.exports.updateTrainings = async (req, res) => {
     }
 
     req.body.benefits = JSON.parse(req.body.benefits || "[]");
-    req.body.courseOffers = JSON.parse(req.body.courseOffers || "[]");
+    req.body.offers = JSON.parse(req.body.offers || "[]");
     req.body.works = JSON.parse(req.body.works || "[]");
     req.body.tags = JSON.parse(req.body.tags || "[]");
 

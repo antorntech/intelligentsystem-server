@@ -1,21 +1,7 @@
 const mongoose = require("mongoose");
 
-// Define the schema for each module
-const moduleSchema = new mongoose.Schema({
-  title: {
-    type: String,
-  },
-  subTitle: {
-    type: String,
-  },
-  lists: {
-    type: [String],
-    default: [], // Default to an empty array for lists
-  },
-});
-
 // Define the main Training schema
-const trainingSchema = new mongoose.Schema({
+const servicesSchema = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -51,11 +37,7 @@ const trainingSchema = new mongoose.Schema({
   banner: {
     type: String, // Assuming this will hold the image URL or file path
   },
-  module: {
-    type: [moduleSchema], // Array of module objects
-    default: [], // Default is an empty array
-  },
 });
 
-// Export the Training model
-module.exports = mongoose.model("Training", trainingSchema, "Trainings");
+// Export the Service model
+module.exports = mongoose.model("Service", servicesSchema, "Services");
