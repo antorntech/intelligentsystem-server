@@ -44,15 +44,10 @@ app.use(
 );
 
 const adminRoutes = require("./routes/v1/admin.route");
-const heroContentRoutes = require("./routes/v1/herocontent.route");
-const taskListRoutes = require("./routes/v1/tasklist.route");
 const blogRoutes = require("./routes/v1/blogs.route");
 const softwareRoutes = require("./routes/v1/software.route");
 const serviceRoutes = require("./routes/v1/service.route");
 const trainingRoutes = require("./routes/v1/training.route");
-const eventRoutes = require("./routes/v1/events.route");
-const newsRoutes = require("./routes/v1/news.route");
-const aboutRoutes = require("./routes/v1/about.route");
 const contactRoutes = require("./routes/v1/contact.route");
 const promotionRoutes = require("./routes/v1/promotion.route");
 const faqsRoutes = require("./routes/v1/faq.route");
@@ -74,15 +69,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/admin", adminRoutes);
-app.use("/api/v1/herocontent", heroContentRoutes);
-app.use("/api/v1/tasklist", taskListRoutes);
 app.use("/api/v1/blogs", blogRoutes);
 app.use("/api/v1/softwares", softwareRoutes);
 app.use("/api/v1/services", serviceRoutes);
 app.use("/api/v1/trainings", trainingRoutes);
-app.use("/api/v1/events", eventRoutes);
-app.use("/api/v1/news", newsRoutes);
-app.use("/api/v1/about", aboutRoutes);
 app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/promotions", promotionRoutes);
 app.use("/api/v1/faqs", faqsRoutes);
