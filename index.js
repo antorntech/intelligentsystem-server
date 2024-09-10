@@ -55,6 +55,7 @@ const sponsorsRoutes = require("./routes/v1/sponsor.route");
 const reviewsRoutes = require("./routes/v1/review.route");
 const slidersRoutes = require("./routes/v1/slider.route");
 const roadmapsRoutes = require("./routes/v1/roadmap.route");
+const notificationsRoutes = require("./routes/v1/notification.route");
 
 // DB Connection
 const connection = require("./db/connection");
@@ -81,6 +82,7 @@ app.use("/api/v1/sponsors", sponsorsRoutes);
 app.use("/api/v1/reviews", reviewsRoutes);
 app.use("/api/v1/sliders", slidersRoutes);
 app.use("/api/v1/roadmaps", roadmapsRoutes);
+app.use("/api/v1/notifications", notificationsRoutes);
 
 app.listen(port, () => {
   console.log("listening on port " + port);
