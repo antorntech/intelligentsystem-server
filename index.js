@@ -57,6 +57,7 @@ const contactRoutes = require("./routes/v1/contact.route");
 const promotionRoutes = require("./routes/v1/promotion.route");
 const faqsRoutes = require("./routes/v1/faq.route");
 const sponsorsRoutes = require("./routes/v1/sponsor.route");
+const reviewsRoutes = require("./routes/v1/review.route");
 
 // DB Connection
 const connection = require("./db/connection");
@@ -85,6 +86,7 @@ app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/promotions", promotionRoutes);
 app.use("/api/v1/faqs", faqsRoutes);
 app.use("/api/v1/sponsors", sponsorsRoutes);
+app.use("/api/v1/reviews", reviewsRoutes);
 
 app.listen(port, () => {
   console.log("listening on port " + port);
