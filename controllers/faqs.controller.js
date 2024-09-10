@@ -29,7 +29,7 @@ module.exports.getRecentFaqs = async (req, res) => {
   }
 };
 
-// Get a single promotion by ID
+// Get a single faq by ID
 module.exports.singleFaqs = async (req, res) => {
   try {
     const { faqsId } = req.params;
@@ -44,7 +44,7 @@ module.exports.singleFaqs = async (req, res) => {
   }
 };
 
-// Add a new promotion
+// Add a new faq
 module.exports.addFaqs = async (req, res) => {
   try {
     console.log(req.body);
@@ -61,7 +61,7 @@ module.exports.addFaqs = async (req, res) => {
   }
 };
 
-// Update a promotion by ID
+// Update a faq by ID
 module.exports.updateFaqs = async (req, res) => {
   try {
     const { faqsId } = req.params;
@@ -88,15 +88,15 @@ module.exports.updateFaqs = async (req, res) => {
   }
 };
 
-// Delete a promotion by ID
+// Delete a faq by ID
 module.exports.deleteFaqs = async (req, res) => {
   try {
     const { faqsId } = req.params;
-    const promotion = await Faqs.findByIdAndDelete(faqsId);
+    const faq = await Faqs.findByIdAndDelete(faqsId);
     res.status(200).json({
       status: "success",
       message: "Faq deleted successfully",
-      data: promotion,
+      data: faq,
     });
   } catch (error) {
     res.status(500).json({
