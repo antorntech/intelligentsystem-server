@@ -56,6 +56,7 @@ const reviewsRoutes = require("./routes/v1/review.route");
 const slidersRoutes = require("./routes/v1/slider.route");
 const roadmapsRoutes = require("./routes/v1/roadmap.route");
 const notificationsRoutes = require("./routes/v1/notification.route");
+const homeInfosRoutes = require("./routes/v1/homeinfo.route");
 
 // DB Connection
 const connection = require("./db/connection");
@@ -83,6 +84,7 @@ app.use("/api/v1/reviews", reviewsRoutes);
 app.use("/api/v1/sliders", slidersRoutes);
 app.use("/api/v1/roadmaps", roadmapsRoutes);
 app.use("/api/v1/notifications", notificationsRoutes);
+app.use("/api/v1/homeinfos", homeInfosRoutes);
 
 app.listen(port, () => {
   console.log("listening on port " + port);
