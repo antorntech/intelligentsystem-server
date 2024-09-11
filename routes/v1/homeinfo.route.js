@@ -10,17 +10,18 @@ app.get(
   "/:homeInfosId/categories/:infoCategoriesId",
   homeInfosController.singleHomeInfoCategory
 );
-app.post("/add", upload.single("banner"), homeInfosController.addHomeInfos);
-app.post("/:homeInfosId/add-category", homeInfosController.addHomeInfoCategory);
+app.post("/add", homeInfosController.addHomeInfos);
+app.post(
+  "/:homeInfosId/add-category",
+  upload.single("banner"),
+  homeInfosController.addHomeInfoCategory
+);
 app.put(
   "/:id/categories/:infoCategoriesId",
+  upload.single("banner"),
   homeInfosController.updateHomeInfoCategory
 );
-app.put(
-  "/update/:homeInfosId",
-  upload.single("banner"),
-  homeInfosController.updateHomeInfos
-);
+app.put("/update/:homeInfosId", homeInfosController.updateHomeInfos);
 app.delete("/delete/:homeInfosId", homeInfosController.deleteHomeInfos);
 app.delete(
   "/:trainingId/categories/:infoCategoriesId",
