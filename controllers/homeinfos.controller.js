@@ -106,7 +106,7 @@ module.exports.deleteHomeInfos = async (req, res) => {
   }
 };
 
-// Add a new module to a specific homeInfo
+// Add a new category to a specific homeInfo
 module.exports.addHomeInfoCategory = async (req, res) => {
   try {
     const { homeInfosId } = req.params;
@@ -118,7 +118,6 @@ module.exports.addHomeInfoCategory = async (req, res) => {
     }
 
     const { title, link, banner } = req.body;
-
     const homeInfo = await HomeInfo.findById(homeInfosId);
 
     if (!homeInfo) {
@@ -128,8 +127,8 @@ module.exports.addHomeInfoCategory = async (req, res) => {
       });
     }
 
-    // Add new module to the homeInfo
-    homeInfo.module.push({
+    // Add new category to infoCategories
+    homeInfo.infoCategories.push({
       title,
       link,
       banner,
@@ -186,60 +185,66 @@ module.exports.singleHomeInfoCategory = async (req, res) => {
 };
 
 module.exports.updateHomeInfoCategory = async (req, res) => {
-  const { id, infoCategoriesId } = req.params;
+  const { id, infoCategoriesId } = req.params; // IDs from the route
 
+  // If a file (image) is uploaded, add it to the request body
   if (req.file) {
-    Object.assign(req.body, {
-      banner: "/uploads/images/" + req.file.filename,
-    });
+    req.body.banner = "/uploads/images/" + req.file.filename;
   }
 
-  const { title, link, banner } = req.body;
+  const { title, link, banner } = req.body; // Get the fields from the request
 
   try {
-    // Find the homeInfo by ID
-    const homeInfo = await HomeInfo.findById(id).exec();
+    // Find the HomeInfo by ID
+    const homeInfo = await HomeInfo.findById(id);
 
     if (!homeInfo) {
       return res.status(404).json({ message: "HomeInfo not found" });
     }
 
-    // Find the module by ID within the homeInfo
-    const infoCategories = homeInfo.infoCategories.id(infoCategoriesId);
+    // Find the specific infoCategory by its ID
+    const infoCategory = homeInfo.infoCategories.id(infoCategoriesId);
 
-    if (!infoCategories) {
-      return res.status(404).json({ message: "HomeInfo not found" });
+    if (!infoCategory) {
+      return res.status(404).json({ message: "Category not found" });
     }
 
-    // Update infoCategories details
-    infoCategories.title = title || infoCategories.title;
-    infoCategories.link = link || infoCategories.link;
-    infoCategories.banner = banner || infoCategories.banner;
+    // Update the infoCategory fields
+    infoCategory.title = title || infoCategory.title;
+    infoCategory.link = link || infoCategory.link;
+    infoCategory.banner = banner || infoCategory.banner;
 
-    // Save the homeInfo with the updated module
+    // Save the updated document
     await homeInfo.save();
 
-    res.status(200).json(module);
+    res.status(200).json({
+      message: "Category updated successfully!",
+      data: infoCategory,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "An error occurred while updating the module", error });
+    console.error("Error updating category:", error);
+    res.status(500).json({
+      message: "An error occurred while updating the category",
+      error: error.message,
+    });
   }
 };
 
 module.exports.deleteHomeInfoCategory = async (req, res) => {
-  const { homeInfoId, infoCategoriesId } = req.params;
+  const { homeInfoId, infoCategoriesId } = req.params; // Parameters from the route
 
   try {
-    // Find the homeInfo document and remove the module by its ID from the 'module' array
+    // Find the HomeInfo document and remove the category by its ID from the 'infoCategories' array
     const result = await HomeInfo.findOneAndUpdate(
       { _id: homeInfoId },
-      { $pull: { module: { _id: infoCategoriesId } } }, // Use 'module' as the field name
+      { $pull: { infoCategories: { _id: infoCategoriesId } } }, // Pull the category from the array
       { new: true } // Return the updated document
     );
 
     if (!result) {
-      return res.status(404).json({ message: "HomeInfo or module not found" });
+      return res
+        .status(404)
+        .json({ message: "HomeInfo or category not found" });
     }
 
     res.status(200).json({ message: "Category deleted successfully", result });

@@ -12,19 +12,20 @@ app.get(
 );
 app.post("/add", homeInfosController.addHomeInfos);
 app.post(
-  "/:homeInfosId/add-category",
+  "/:homeInfosId/add-infoCategory",
   upload.single("banner"),
   homeInfosController.addHomeInfoCategory
 );
 app.put(
   "/:id/categories/:infoCategoriesId",
-  upload.single("banner"),
+  upload.single("banner"), // This middleware handles file uploads
   homeInfosController.updateHomeInfoCategory
 );
+
 app.put("/update/:homeInfosId", homeInfosController.updateHomeInfos);
 app.delete("/delete/:homeInfosId", homeInfosController.deleteHomeInfos);
 app.delete(
-  "/:trainingId/categories/:infoCategoriesId",
+  "/:homeInfoId/categories/:infoCategoriesId",
   homeInfosController.deleteHomeInfoCategory
 );
 

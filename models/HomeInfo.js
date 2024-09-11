@@ -23,8 +23,8 @@ const homeInfoSchema = new mongoose.Schema({
     type: String,
   },
   infoCategories: {
-    type: [infoCategory], // Array of module objects
-    default: [], // Default is an empty array
+    type: [infoCategory],
+    default: [],
   },
 });
 
